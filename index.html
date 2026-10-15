@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Donald AdWorld</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f7fc;color:#182238}
+header{background:#142c68;color:white;padding:28px 16px;text-align:center}
+header h1{margin:0;font-size:30px}
+header p{margin:10px 0 0}
+main{max-width:700px;margin:25px auto;padding:20px}
+.card{background:white;padding:22px;border-radius:14px;box-shadow:0 3px 15px #0001}
+label{display:block;font-weight:bold;margin-top:16px}
+input,textarea,select{width:100%;padding:13px;margin-top:7px;border:1px solid #ccd2df;border-radius:7px;font-size:16px}
+.platforms{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.platforms label{font-weight:normal;margin:0}
+.platforms input{width:auto}
+button{background:#1758d4;color:white;border:0;border-radius:8px;padding:14px;font-size:16px;font-weight:bold;width:100%;margin-top:22px}
+#preview{display:none;background:#eaf3ff;padding:16px;margin-top:20px;border-radius:8px;overflow-wrap:anywhere}
+footer{text-align:center;padding:25px;color:#667085}
+</style>
+</head>
+<body>
+<header>
+<h1>Donald AdWorld</h1>
+<p>One Ad. A World of Customers.</p>
+</header>
+<main>
+<div class="card">
+<h2>Create Your Advertisement</h2>
+<p>Prepare your advert and choose where you want to share it.</p>
+<form id="adForm">
+<label>Advertisement Title</label>
+<input id="title" required placeholder="What are you advertising?">
+
+<label>Advertisement Details</label>
+<textarea id="details" rows="5" required placeholder="Describe your product or service"></textarea>
+
+<label>Choose Country</label>
+<select id="country" required>
+<option value="">Select a country</option>
+<option>United States</option>
+<option>United Kingdom</option>
+<option>Canada</option>
+<option>Nigeria</option>
+<option>Australia</option>
+<option>South Africa</option>
+<option>Ghana</option>
+<option>Other</option>
+</select>
+
+<label>Choose Social Platforms</label>
+<div class="platforms">
+<label><input type="checkbox" value="Facebook"> Facebook</label>
+<label><input type="checkbox" value="Instagram"> Instagram</label>
+<label><input type="checkbox" value="TikTok"> TikTok</label>
+<label><input type="checkbox" value="Threads"> Threads</label>
+<label><input type="checkbox" value="X"> X</label>
+<label><input type="checkbox" value="WhatsApp"> WhatsApp</label>
+</div>
+
+<label>Your Contact Email</label>
+<input id="email" type="email" placeholder="you@example.com">
+
+<label>Your Phone or WhatsApp</label>
+<input id="phone" type="tel" placeholder="Your contact number">
+
+<label>Website or Product Link (optional)</label>
+<input id="link" type="url" placeholder="https://example.com">
+
+<button type="submit">Prepare My Advertisement</button>
+</form>
+<div id="preview"></div>
+</div>
+</main>
+<footer>Donald AdWorld &copy; 2026</footer>
+<script>
+document.getElementById("adForm").addEventListener("submit",function(e){
+e.preventDefault();
+const title=document.getElementById("title").value;
+const details=document.getElementById("details").value;
+const country=document.getElementById("country").value;
+const platforms=[...document.querySelectorAll(".platforms input:checked")].map(x=>x.value);
+const email=document.getElementById("email").value;
+const phone=document.getElementById("phone").value;
+const link=document.getElementById("link").value;
+const box=document.getElementById("preview");
+box.style.display="block";
+box.replaceChildren();
+const heading=document.createElement("h3");
+heading.textContent="Your Advertisement Preview";
+box.appendChild(heading);
+[
+"Title: "+title,
+"Details: "+details,
+"Country: "+country,
+"Platforms: "+(platforms.join(", ")||"None selected"),
+"Email: "+(email||"Not provided"),
+"Phone: "+(phone||"Not provided"),
+"Link: "+(link||"Not provided")
+].forEach(function(t){
+const p=document.createElement("p");
+p.textContent=t;
+box.appendChild(p);
+});
+const note=document.createElement("p");
+note.textContent="This is a preview only. It does not publish your advert to social media.";
+box.appendChild(note);
+});
+</script>
+</body>
+</html>
